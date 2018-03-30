@@ -18,6 +18,17 @@ namespace BookLib
 
         }
 
+        public void AddBook(string ISBN)
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO Books (ISBN, RecievedDate) VALUES (" + ISBN + ", " + DateTime.Now.Date + ")";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = Connection;
+
+            cmd.ExecuteNonQuery();
+        }
+
         public void GetScanJob(int depth)
         {
             SqlCommand cmd = new SqlCommand();
