@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
+using System.Diagnostics;
 
 namespace BookLib
 {
@@ -16,9 +18,21 @@ namespace BookLib
 
         }
 
-        public List<Book> GetScanJob(int depth)
+        public void GetScanJob(int depth)
         {
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
 
+            cmd.CommandText = "SELECT * FROM Books WHERE SellDate = null";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = Connection;
+
+            reader = cmd.ExecuteReader();
+
+            while(reader.Read())
+            {
+                Debug.Write(reader.GetString(1));
+            }
         }
     }
 }
