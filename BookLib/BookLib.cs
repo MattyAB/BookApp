@@ -15,14 +15,15 @@ namespace BookLib
 
         public BookLib()
         {
-
+            Connection.Open();
         }
 
         public void AddBook(string ISBN)
         {
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = "INSERT INTO Books (ISBN, RecievedDate) VALUES (" + ISBN + ", " + DateTime.Now.Date + ")";
+            cmd.CommandText = "INSERT INTO Books (ISBN, RecievedDate) VALUES ('" + ISBN + "', @date)";
+            cmd.Parameters.AddWithValue("@date", DateTime.Now);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = Connection;
 

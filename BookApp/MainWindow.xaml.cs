@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,20 @@ namespace BookApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        BookLib.BookLib lib;
+
         public MainWindow()
         {
+            lib = new BookLib.BookLib();
             InitializeComponent();
+        }
+
+        private void ISBNBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Return)
+            {
+                lib.AddBook(ISBNBox.Text);
+            }
         }
     }
 }
