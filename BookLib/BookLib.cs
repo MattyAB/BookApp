@@ -55,7 +55,7 @@ namespace BookLib
         }
 
         // Uses code from https://www.codeproject.com/Tips/75999/Convert-ISBN10-To-ISBN-13.aspx
-        private string ISBNConvert(string ISBN10)
+        public string ISBNConvert(string ISBN10)
         {
             string isbn10 = "978" + ISBN10.Substring(0, 9);
             int isbn10_1 = Convert.ToInt32(isbn10.Substring(0, 1));
