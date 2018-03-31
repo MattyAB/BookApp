@@ -23,5 +23,21 @@ namespace BookLib.Tests
             Assert.AreEqual("Arthur A. Levine Books", book.publisher);
             Assert.AreEqual(DateTime.Parse("2016-07-31"), book.publishDate);
         }
+
+        [TestMethod()]
+        public void GetBookDetailsBadISBNTest()
+        {
+            Book book = new Book("3928541034");
+            try
+            {
+                book.GetBookDetails();
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                if (e.Message != "Specified ISBN is not valid.")
+                    throw e;
+            }
+        }
     }
 }
