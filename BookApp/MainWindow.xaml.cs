@@ -29,17 +29,9 @@ namespace BookApp
             InitializeComponent();
         }
 
-        private void ISBNBox_KeyDown(object sender, KeyEventArgs e)
+        private void AddBookNav_Click(object sender, RoutedEventArgs e)
         {
-            if(e.Key == Key.Return)
-            {
-                lib.AddBook(ISBNBox.Text);
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            BookAddWindow bookAddWindow = new BookAddWindow();
+            BookAddWindow bookAddWindow = new BookAddWindow(lib);
             bookAddWindow.Show();
         }
     }

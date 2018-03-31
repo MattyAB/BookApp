@@ -19,9 +19,20 @@ namespace BookApp
     /// </summary>
     public partial class BookAddWindow : Window
     {
-        public BookAddWindow()
+        BookLib.BookLib lib;
+
+        public BookAddWindow(BookLib.BookLib lib)
         {
+            this.lib = lib;
             InitializeComponent();
+        }
+
+        private void ISBNBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                lib.AddBook(ISBNBox.Text);
+            }
         }
     }
 }
