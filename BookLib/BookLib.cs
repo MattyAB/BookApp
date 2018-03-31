@@ -18,8 +18,32 @@ namespace BookLib
             Connection.Open();
         }
 
-        public void AddBook(string ISBN)
+        public void AddBook(string RawISBN)
         {
+            // Checks
+
+            string ISBN = "";
+
+            foreach (char c in RawISBN)
+            {
+                if (Char.IsNumber(c))
+                {
+                    ISBN += c;
+                }
+            }
+
+            if (ISBN.Length != 13 && ISBN.Length != 10)
+            {
+                throw new Exception("The ISBN was not a known ISBN length. Needs to be 10 or 13 characters.");
+            }
+
+            if (ISBN.Length == 10)
+            {
+                ISBN = ISBNConvert(ISBN);
+            }
+
+            // SQL Command
+
             SqlCommand cmd = new SqlCommand();
 
             cmd.CommandText = "INSERT INTO Books (ISBN, RecievedDate) VALUES ('" + ISBN + "', @date)";
@@ -28,6 +52,29 @@ namespace BookLib
             cmd.Connection = Connection;
 
             cmd.ExecuteNonQuery();
+        }
+
+        // Uses code from https://www.codeproject.com/Tips/75999/Convert-ISBN10-To-ISBN-13.aspx
+        private string ISBNConvert(string ISBN10)
+        {
+            string isbn10 = "978" + ISBN10.Substring(0, 9);
+            int isbn10_1 = Convert.ToInt32(isbn10.Substring(0, 1));
+            int isbn10_2 = Convert.ToInt32(Convert.ToInt32(isbn10.Substring(1, 1)) * 3);
+            int isbn10_3 = Convert.ToInt32(isbn10.Substring(2, 1));
+            int isbn10_4 = Convert.ToInt32(Convert.ToInt32(isbn10.Substring(3, 1)) * 3);
+            int isbn10_5 = Convert.ToInt32(isbn10.Substring(4, 1));
+            int isbn10_6 = Convert.ToInt32(Convert.ToInt32(isbn10.Substring(5, 1)) * 3);
+            int isbn10_7 = Convert.ToInt32(isbn10.Substring(6, 1));
+            int isbn10_8 = Convert.ToInt32(Convert.ToInt32(isbn10.Substring(7, 1)) * 3);
+            int isbn10_9 = Convert.ToInt32(isbn10.Substring(8, 1));
+            int isbn10_10 = Convert.ToInt32(Convert.ToInt32(isbn10.Substring(9, 1)) * 3);
+            int isbn10_11 = Convert.ToInt32(isbn10.Substring(10, 1));
+            int isbn10_12 = Convert.ToInt32(Convert.ToInt32(isbn10.Substring(11, 1)) * 3);
+            int k = (isbn10_1 + isbn10_2 + isbn10_3 + isbn10_4 + isbn10_5 + isbn10_6 + isbn10_7 + isbn10_8 + isbn10_9 + isbn10_10 + isbn10_11 + isbn10_12);
+            int checkdigit = 10 - ((isbn10_1 + isbn10_2 + isbn10_3 + isbn10_4 + isbn10_5 + isbn10_6 + isbn10_7 + isbn10_8 + isbn10_9 + isbn10_10 + isbn10_11 + isbn10_12) % 10);
+            if (checkdigit == 10)
+                checkdigit = 0;
+            return isbn10 + checkdigit.ToString();
         }
 
         public void GetScanJob(int depth)
