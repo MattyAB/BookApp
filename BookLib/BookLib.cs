@@ -45,6 +45,9 @@ namespace BookLib
             Book book = new Book(ISBN);
             book.GetBookDetails();
 
+            if(GetBook(ISBN).Count != 0)
+                throw new Exception("This book is already owned.");
+
             // SQL Command
 
             SqlCommand cmd = new SqlCommand();
@@ -57,6 +60,29 @@ namespace BookLib
             cmd.ExecuteNonQuery();
 
             return book.title;
+        }
+
+        public List<Book> GetBook(string ISBN)
+        {
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+
+            cmd.CommandText = "SELECT * FROM Books WHERE SellDate = null";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = Connection;
+
+            reader = cmd.ExecuteReader();
+
+            List<Book> books = new List<Book>();
+
+            while (reader.Read())
+            {
+                Book book = new Book(ISBN);
+                if(reader.GetValue(3) == null)
+                    books.Add(book);
+            }
+
+            return books;
         }
 
         // Uses code from https://www.codeproject.com/Tips/75999/Convert-ISBN10-To-ISBN-13.aspx

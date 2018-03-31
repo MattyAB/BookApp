@@ -45,6 +45,10 @@ namespace BookApp
                     {
                         AddBookStatusBox.Text = ex.Message;
                     }
+                    else if (ex.Message == "This book is already owned.")
+                    {
+                        AddBookStatusBox.Text = ex.Message;
+                    }
                     else
                     {
                         throw ex;
