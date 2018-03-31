@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4F26018E-B26A-4509-8CEF-FAE82E686FB4}</ProjectGuid>
+    <ProjectGuid>{41694CDB-F946-476A-9195-DAB94F70451D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>BookApp</RootNamespace>
     <AssemblyName>BookApp</AssemblyName>
@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookLib\BookLib.csproj">
-      <Project>{8ED75BD0-C141-4E05-A780-516935EBA213}</Project>
+      <Project>{14bb3ce1-e4c7-445b-aa0a-8a83cb1e229a}</Project>
       <Name>BookLib</Name>
     </ProjectReference>
   </ItemGroup>
