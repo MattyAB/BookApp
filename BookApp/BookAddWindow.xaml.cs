@@ -31,7 +31,21 @@ namespace BookApp
         {
             if (e.Key == Key.Return)
             {
-                lib.AddBook(ISBNBox.Text);
+                try
+                {
+                    lib.AddBook(ISBNBox.Text);
+                }
+                catch(Exception ex)
+                {
+                    if (ex.Message == "The ISBN was not a known ISBN length. Needs to be 10 or 13 characters.")
+                    {
+                        AddBookStatusBox.Text = "The ISBN was not a known ISBN length. Needs to be 10 or 13 numberic characters.";
+                    }
+                    else
+                    {
+                        throw ex;
+                    }
+                }
             }
         }
     }

@@ -8,5 +8,6 @@
         Title="BookAddWindow" Height="450" Width="800">
     <Grid>
         <TextBox Name="ISBNBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" KeyDown="ISBNBox_KeyDown"/>
+        <TextBlock Name="AddBookStatusBox" HorizontalAlignment="Left" Margin="135,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" Width="647"/>
     </Grid>
 </Window>
