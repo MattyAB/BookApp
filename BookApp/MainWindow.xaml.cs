@@ -36,5 +36,11 @@ namespace BookApp
                 lib.AddBook(ISBNBox.Text);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            BookAddWindow bookAddWindow = new BookAddWindow();
+            bookAddWindow.Show();
+        }
     }
 }
