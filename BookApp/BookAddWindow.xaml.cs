@@ -39,7 +39,11 @@ namespace BookApp
                 {
                     if (ex.Message == "The ISBN was not a known ISBN length. Needs to be 10 or 13 characters.")
                     {
-                        AddBookStatusBox.Text = "The ISBN was not a known ISBN length. Needs to be 10 or 13 numberic characters.";
+                        AddBookStatusBox.Text = ex.Message;
+                    }
+                    else if (ex.Message == "Specified ISBN is not valid.")
+                    {
+                        AddBookStatusBox.Text = ex.Message;
                     }
                     else
                     {

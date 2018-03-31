@@ -18,7 +18,7 @@ namespace BookLib
             Connection.Open();
         }
 
-        public void AddBook(string RawISBN)
+        public string AddBook(string RawISBN)
         {
             // Checks
 
@@ -42,6 +42,9 @@ namespace BookLib
                 ISBN = ISBNConvert(ISBN);
             }
 
+            Book book = new Book(ISBN);
+            book.GetBookDetails();
+
             // SQL Command
 
             SqlCommand cmd = new SqlCommand();
@@ -52,6 +55,8 @@ namespace BookLib
             cmd.Connection = Connection;
 
             cmd.ExecuteNonQuery();
+
+            return book.title;
         }
 
         // Uses code from https://www.codeproject.com/Tips/75999/Convert-ISBN10-To-ISBN-13.aspx
