@@ -25,13 +25,38 @@ namespace BookApp
         BookLib.BookLib lib;
 
         List<ScanJob> jobs;
+        ScanJob job;
 
         public ScanJobWindow(BookLib.BookLib lib, int depth)
         {
             this.lib = lib;
             InitializeComponent();
             jobs = lib.GetScanJob(depth);
+            DisplayNextJob();
             BorderBrush = Application.Current.FindResource($"StatusBarPurpleBrushKey") as SolidColorBrush;
+        }
+
+        void DisplayNextJob()
+        {
+            job = jobs[0];
+            jobs.RemoveAt(0);
+
+            TitleBlock.Text = job.ISBN;
+            // TODO: BARCODE AND OTHER DISPLAY
+        }
+
+        void SubmitJob()
+        {
+            // TODO: SUBMIT JOB
+        }
+
+        private void PriceBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                SubmitJob();
+                DisplayNextJob();
+            }
         }
     }
 }

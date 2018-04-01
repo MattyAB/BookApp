@@ -158,7 +158,9 @@ namespace BookLib
                 }
             }
 
-            return jobs;
+            List<ScanJob> orderedJobs = jobs.OrderBy(o => o.site).ToList();
+
+            return orderedJobs;
         }
     }
 }
