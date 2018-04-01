@@ -1,4 +1,5 @@
-﻿using ModernChrome;
+﻿using BookLib;
+using ModernChrome;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,10 +24,13 @@ namespace BookApp
     {
         BookLib.BookLib lib;
 
-        public ScanJobWindow(BookLib.BookLib lib)
+        List<ScanJob> jobs;
+
+        public ScanJobWindow(BookLib.BookLib lib, int depth)
         {
             this.lib = lib;
             InitializeComponent();
+            jobs = lib.GetScanJob(depth);
             BorderBrush = Application.Current.FindResource($"StatusBarPurpleBrushKey") as SolidColorBrush;
         }
     }

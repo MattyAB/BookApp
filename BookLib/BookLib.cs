@@ -11,7 +11,7 @@ namespace BookLib
 {
     public class BookLib
     {
-        SqlConnection Connection = new SqlConnection("Data Source=HORCRUX;Initial Catalog=Books;Integrated Security=True");
+        SqlConnection Connection = new SqlConnection("Data Source=HORCRUX;Initial Catalog=Books;Integrated Security=True;MultipleActiveResultSets=True");
 
         public BookLib()
         {
@@ -104,21 +104,61 @@ namespace BookLib
             return isbn10 + checkdigit.ToString();
         }
 
-        public void GetScanJob(int depth)
+        public List<ScanJob> GetScanJob(int depth)
         {
+            List<ScanJob> jobs = new List<ScanJob>();
+
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 
-            cmd.CommandText = "SELECT * FROM Books WHERE SellDate = null";
+            cmd.CommandText = "SELECT * FROM Books WHERE SellDate IS NULL";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = Connection;
 
             reader = cmd.ExecuteReader();
 
+            // For every book it gets
             while(reader.Read())
             {
-                Debug.Write(reader.GetString(1));
+                // New SQL command to get scans of book
+                SqlCommand cmd1 = new SqlCommand();
+                SqlDataReader reader1;
+
+                cmd1.CommandText = "SELECT * FROM BookPrice WHERE ID = " + reader.GetInt32(0);
+                cmd1.CommandType = CommandType.Text;
+                cmd1.Connection = Connection;
+
+                reader1 = cmd1.ExecuteReader();
+
+                List<ScanJob> pastScans = new List<ScanJob>();
+
+                // Add each past scan to the list of scans
+                while (reader1.Read())
+                {
+                    ScanJob job = new ScanJob();
+                    job.site = Convert.ToInt32(reader1.GetString(1));
+                    job.ISBN = reader.GetString(1);
+                    job.date = DateTime.Parse(reader1.GetString(2));
+                }
+
+                if(pastScans.Count == 0)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        ScanJob job = new ScanJob();
+                        job.ISBN = reader.GetString(1);
+                        job.site = i;
+                        jobs.Add(job);
+                    }
+                }
+                else
+                {
+                    // NEEDS MORE CODE
+                    List<ScanJob> orderedScans = pastScans.OrderBy(o => o.date).ToList();
+                }
             }
+
+            return jobs;
         }
     }
 }

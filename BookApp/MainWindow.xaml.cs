@@ -35,5 +35,11 @@ namespace BookApp
             BookAddWindow bookAddWindow = new BookAddWindow(lib);
             bookAddWindow.Show();
         }
+
+        private void ScanJobNav_Click(object sender, RoutedEventArgs e)
+        {
+            ScanJobWindow scanJobWindow = new ScanJobWindow(lib, 0);
+            scanJobWindow.Show();
+        }
     }
 }

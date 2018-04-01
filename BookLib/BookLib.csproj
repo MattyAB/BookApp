@@ -46,6 +46,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="BookLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScanJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
