@@ -28,6 +28,8 @@ namespace BookApp
         List<ScanJob> jobs;
         ScanJob job;
 
+        int previousSite = 0;
+
         public ScanJobWindow(BookLib.BookLib lib, int depth)
         {
             this.lib = lib;
@@ -39,6 +41,12 @@ namespace BookApp
 
         void DisplayNextJob()
         {
+            if(job.site != previousSite)
+            {
+                previousSite = job.site;
+                System.Media.SystemSounds.Beep.Play();
+            }
+
             job = jobs[0];
             jobs.RemoveAt(0);
 
@@ -87,6 +95,13 @@ namespace BookApp
         void SubmitJob()
         {
             // TODO: SUBMIT JOB
+
+            job.price = Convert.ToInt32(PriceBox.Text);
+            job.date = DateTime.Now;
+
+            PriceBox.Text = "";
+
+            lib.SubmitJob(job);
         }
 
         private void PriceBox_KeyDown(object sender, KeyEventArgs e)

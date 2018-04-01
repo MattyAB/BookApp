@@ -147,6 +147,7 @@ namespace BookLib
                     {
                         ScanJob job = new ScanJob();
                         job.ISBN = reader.GetString(1);
+                        job.ID = reader.GetInt32(0);
                         job.site = i;
                         jobs.Add(job);
                     }
@@ -161,6 +162,23 @@ namespace BookLib
             List<ScanJob> orderedJobs = jobs.OrderBy(o => o.site).ToList();
 
             return orderedJobs;
+        }
+
+        public void SubmitJob(ScanJob job)
+        {
+            // SQL Command
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "INSERT INTO BookPrice VALUES (@ID, @site, @price, @date)";
+            cmd.Parameters.AddWithValue("@ID", job.ID);
+            cmd.Parameters.AddWithValue("@site", job.site);
+            cmd.Parameters.AddWithValue("@price", job.price);
+            cmd.Parameters.AddWithValue("@date", job.date);
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = Connection;
+
+            cmd.ExecuteNonQuery();
         }
     }
 }

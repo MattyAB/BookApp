@@ -8,6 +8,7 @@ namespace BookLib
 {
     public class ScanJob
     {
+        public int ID;
         public int site;
         public string ISBN;
         public int price;
