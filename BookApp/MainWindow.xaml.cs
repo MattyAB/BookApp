@@ -39,7 +39,19 @@ namespace BookApp
         private void ScanJobNav_Click(object sender, RoutedEventArgs e)
         {
             ScanJobWindow scanJobWindow = new ScanJobWindow(lib, 0);
-            scanJobWindow.Show();
+            try
+            {
+                scanJobWindow.Show();
+            }
+            catch(Exception ex)
+            {
+                if (ex.Message == "No more scans to do.")
+                {
+
+                }
+                else
+                    throw ex;
+            }
         }
     }
 }

@@ -30,6 +30,8 @@ namespace BookApp
 
         int previousSite = 0;
 
+        public bool NoMoreScans;
+
         public ScanJobWindow(BookLib.BookLib lib, int depth)
         {
             this.lib = lib;
@@ -41,67 +43,83 @@ namespace BookApp
 
         void DisplayNextJob()
         {
-            if(job.site != previousSite)
+            if (jobs.Count != 0)
             {
-                previousSite = job.site;
-                System.Media.SystemSounds.Beep.Play();
+                job = jobs[0];
+                jobs.RemoveAt(0);
+
+                if (job.site != previousSite)
+                {
+                    previousSite = job.site;
+                    System.Media.SystemSounds.Beep.Play();
+                }
+
+                TitleBlock.Text = job.ISBN;
+
+                Barcode barcode = new Barcode();
+                Image img = barcode.Encode(TYPE.ISBN, job.ISBN);
+
+                // Convert Image to BitmapImage
+                var bi = new BitmapImage();
+                using (var ms = new MemoryStream())
+                {
+                    img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    ms.Position = 0;
+
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.StreamSource = ms;
+                    bi.EndInit();
+                }
+
+                BarcodeImage.Source = bi;
+
+                switch (job.site)
+                {
+                    case 0:
+                        SiteBlock.Text = "WeBuyBooks";
+                        break;
+                    case 1:
+                        SiteBlock.Text = "Ziffit";
+                        break;
+                    case 2:
+                        SiteBlock.Text = "MusicMagpie";
+                        break;
+                    case 3:
+                        SiteBlock.Text = "Momox";
+                        break;
+                    case 4:
+                        SiteBlock.Text = "Zapper";
+                        break;
+                    default:
+                        throw new Exception("Site provided was unknown.");
+                }
             }
-
-            job = jobs[0];
-            jobs.RemoveAt(0);
-
-            TitleBlock.Text = job.ISBN;
-
-            Barcode barcode = new Barcode();
-            Image img = barcode.Encode(TYPE.ISBN, job.ISBN);
-
-            // Convert Image to BitmapImage
-            var bi = new BitmapImage();
-            using (var ms = new MemoryStream())
+            else
             {
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                ms.Position = 0;
-
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
-            }
-
-            BarcodeImage.Source = bi;
-
-            switch(job.site)
-            {
-                case 0:
-                    SiteBlock.Text = "WeBuyBooks";
-                    break;
-                case 1:
-                    SiteBlock.Text = "Ziffit";
-                    break;
-                case 2:
-                    SiteBlock.Text = "MusicMagpie";
-                    break;
-                case 3:
-                    SiteBlock.Text = "Momox";
-                    break;
-                case 4:
-                    SiteBlock.Text = "Zapper";
-                    break;
-                default:
-                    throw new Exception("Site provided was unknown.");
+                if(NoMoreScans == false)
+                {
+                    NoMoreScans = true;
+                    TitleBlock.Text = "No more scans. Press enter to exit.";
+                }
+                else
+                {
+                    this.Close();
+                }
             }
         }
 
         void SubmitJob()
         {
-            // TODO: SUBMIT JOB
+            if(NoMoreScans == false)
+            {
+                job.price = Convert.ToInt32(PriceBox.Text);
+                job.date = DateTime.Now;
 
-            job.price = Convert.ToInt32(PriceBox.Text);
-            job.date = DateTime.Now;
+                PriceBox.Text = "";
 
-            PriceBox.Text = "";
-
-            lib.SubmitJob(job);
+                lib.SubmitJob(job);
+            }
         }
 
         private void PriceBox_KeyDown(object sender, KeyEventArgs e)
