@@ -53,10 +53,6 @@ namespace BookApp
                 {
                     AddBookStatusBox.Text = ex.Message;
                 }
-                else if (ex.Message == "Specified ISBN is not valid.")
-                {
-                    AddBookStatusBox.Text = ex.Message;
-                }
                 else if (ex.Message == "This book is already owned.")
                 {
                     AddBookStatusBox.Text = ex.Message;
@@ -98,7 +94,25 @@ namespace BookApp
             string[] lines = File.ReadAllLines(FilePathBox.Text);
             foreach (string line in lines)
             {
-                lib.AddBook(line);
+                try
+                {
+                    lib.AddBook(line);
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message == "The ISBN was not a known ISBN length. Needs to be 10 or 13 characters.")
+                    {
+                        BulkAddStatusBox.Text = line + ": " + ex.Message;
+                    }
+                    else if (ex.Message == "This book is already owned.")
+                    {
+                        BulkAddStatusBox.Text = line + ": " + ex.Message;
+                    }
+                    else
+                    {
+                        throw ex;
+                    }
+                }
             }
         }
     }
