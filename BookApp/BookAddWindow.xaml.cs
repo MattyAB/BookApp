@@ -27,6 +27,7 @@ namespace BookApp
         {
             this.lib = lib;
             InitializeComponent();
+            BorderBrush = Application.Current.FindResource($"StatusBarPurpleBrushKey") as SolidColorBrush;
         }
 
         private void SubmitBox_Click(object sender, RoutedEventArgs e)
