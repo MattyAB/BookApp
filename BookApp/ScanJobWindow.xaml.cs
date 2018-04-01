@@ -61,6 +61,27 @@ namespace BookApp
             }
 
             BarcodeImage.Source = bi;
+
+            switch(job.site)
+            {
+                case 0:
+                    SiteBlock.Text = "WeBuyBooks";
+                    break;
+                case 1:
+                    SiteBlock.Text = "Ziffit";
+                    break;
+                case 2:
+                    SiteBlock.Text = "MusicMagpie";
+                    break;
+                case 3:
+                    SiteBlock.Text = "Momox";
+                    break;
+                case 4:
+                    SiteBlock.Text = "Zapper";
+                    break;
+                default:
+                    throw new Exception("Site provided was unknown.");
+            }
         }
 
         void SubmitJob()

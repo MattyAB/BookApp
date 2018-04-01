@@ -5,8 +5,9 @@
         xmlns:local="clr-namespace:BookApp"
         Title="BookAddWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock Name ="TitleBlock" Text="Scan" Foreground="White" Margin="10,10,654,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
-        <Image Name="BarcodeImage" HorizontalAlignment="Left" Height="100" Margin="10,45,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBox Name="PriceBox" HorizontalAlignment="Left" Height="23" Margin="115,45,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" KeyDown="PriceBox_KeyDown"/>
+        <TextBlock Name ="TitleBlock" Text="Scan" Foreground="White" Margin="10,10,622,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <Image Name="BarcodeImage" HorizontalAlignment="Left" Height="160" Margin="10,45,0,0" VerticalAlignment="Top" Width="160"/>
+        <TextBox Name="PriceBox" HorizontalAlignment="Left" Height="23" Margin="175,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" KeyDown="PriceBox_KeyDown"/>
+        <TextBlock Name ="SiteBlock" Text="" Foreground="White" Margin="175,75,489,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
     </Grid>
 </modern:ModernWindow>
