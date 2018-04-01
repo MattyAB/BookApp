@@ -27,33 +27,68 @@ namespace BookApp
             InitializeComponent();
         }
 
+        private void SubmitBox_Click(object sender, RoutedEventArgs e)
+        {
+            AddBook();
+        }
+
         private void ISBNBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                try
+                AddBook();
+            }
+        }
+
+        private void AddBook()
+        {
+            try
+            {
+                lib.AddBook(ISBNBox.Text);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "The ISBN was not a known ISBN length. Needs to be 10 or 13 characters.")
                 {
-                    lib.AddBook(ISBNBox.Text);
+                    AddBookStatusBox.Text = ex.Message;
                 }
-                catch(Exception ex)
+                else if (ex.Message == "Specified ISBN is not valid.")
                 {
-                    if (ex.Message == "The ISBN was not a known ISBN length. Needs to be 10 or 13 characters.")
-                    {
-                        AddBookStatusBox.Text = ex.Message;
-                    }
-                    else if (ex.Message == "Specified ISBN is not valid.")
-                    {
-                        AddBookStatusBox.Text = ex.Message;
-                    }
-                    else if (ex.Message == "This book is already owned.")
-                    {
-                        AddBookStatusBox.Text = ex.Message;
-                    }
-                    else
-                    {
-                        throw ex;
-                    }
+                    AddBookStatusBox.Text = ex.Message;
                 }
+                else if (ex.Message == "This book is already owned.")
+                {
+                    AddBookStatusBox.Text = ex.Message;
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
+        }
+
+        private void FileBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".txt";
+            dlg.Filter = "TXT Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                FilePathBox.Text = filename;
             }
         }
     }
