@@ -18,7 +18,7 @@ namespace BookLib
             Connection.Open();
         }
 
-        public string AddBook(string RawISBN)
+        public void AddBook(string RawISBN)
         {
             // Checks
 
@@ -42,9 +42,6 @@ namespace BookLib
                 ISBN = ISBNConvert(ISBN);
             }
 
-            Book book = new Book(ISBN);
-            book.GetBookDetails();
-
             if(GetBook(ISBN).Count != 0)
                 throw new Exception("This book is already owned.");
 
@@ -58,28 +55,27 @@ namespace BookLib
             cmd.Connection = Connection;
 
             cmd.ExecuteNonQuery();
-
-            return book.title;
         }
-
+        
         public List<Book> GetBook(string ISBN)
         {
             SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
 
-            cmd.CommandText = "SELECT * FROM Books WHERE SellDate = null";
+            cmd.CommandText = "SELECT * FROM Books WHERE SellDate IS NULL";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = Connection;
 
-            reader = cmd.ExecuteReader();
-
             List<Book> books = new List<Book>();
 
-            while (reader.Read())
+            using (reader = cmd.ExecuteReader())
             {
-                Book book = new Book(ISBN);
-                if(reader.GetValue(3) == null)
-                    books.Add(book);
+                while (reader.Read())
+                {
+                    Book book = new Book(ISBN);
+                    if (Convert.ToString(reader.GetValue(1)) == ISBN)
+                        books.Add(book);
+                }
             }
 
             return books;
