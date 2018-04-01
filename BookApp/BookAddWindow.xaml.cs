@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,15 @@ namespace BookApp
                 // Open document 
                 string filename = dlg.FileName;
                 FilePathBox.Text = filename;
+            }
+        }
+
+        private void BulkSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            string[] lines = File.ReadAllLines(FilePathBox.Text);
+            foreach (string line in lines)
+            {
+                lib.AddBook(line);
             }
         }
     }

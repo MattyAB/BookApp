@@ -10,7 +10,9 @@
         <TextBox Name="ISBNBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="ISBN" VerticalAlignment="Top" Width="120" KeyDown="ISBNBox_KeyDown" />
         <Button Content="Submit" x:Name="SubmitBox" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="87" Height="23" Click="SubmitBox_Click" />
         <TextBlock Name="AddBookStatusBox" HorizontalAlignment="Left" Margin="227,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" Width="555"/>
+        
         <TextBox Name="FilePathBox" HorizontalAlignment="Left" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Content="Browse" Name="FileBrowse" HorizontalAlignment="Left" Margin="135,38,0,0" VerticalAlignment="Top" Width="87" Height="23" Click="FileBrowse_Click"/>
+        <Button Content="Submit" x:Name="BulkSubmit" HorizontalAlignment="Left" Margin="227,38,0,0" VerticalAlignment="Top" Width="87" Height="23" Click="BulkSubmit_Click"/>
     </Grid>
 </Window>
