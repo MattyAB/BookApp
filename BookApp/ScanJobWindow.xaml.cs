@@ -1,13 +1,14 @@
-﻿using BookLib;
+﻿using BarcodeLib;
+using BookLib;
 using ModernChrome;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -42,7 +43,24 @@ namespace BookApp
             jobs.RemoveAt(0);
 
             TitleBlock.Text = job.ISBN;
-            // TODO: BARCODE AND OTHER DISPLAY
+
+            Barcode barcode = new Barcode();
+            Image img = barcode.Encode(TYPE.ISBN, job.ISBN);
+
+            // Convert Image to BitmapImage
+            var bi = new BitmapImage();
+            using (var ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Position = 0;
+
+                bi.BeginInit();
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.StreamSource = ms;
+                bi.EndInit();
+            }
+
+            BarcodeImage.Source = bi;
         }
 
         void SubmitJob()
