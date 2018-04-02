@@ -14,6 +14,7 @@ namespace BookLib
         public DateTime publishDate;
 
         public int[] prices;
+        public int bestSite;
 
         public Book(string ISBN)
         {
@@ -43,6 +44,21 @@ namespace BookLib
             author = d.items[0].volumeInfo.authors[0];
             publisher = d.items[0].volumeInfo.publisher;
             publishDate = DateTime.Parse(d.items[0].volumeInfo.publishedDate.ToString());
+        }
+
+        public void SetBestSite()
+        {
+            int n = 0;
+
+            for(int i = 0; i < 5; i++)
+            {
+                if(prices[i] > prices[n])
+                {
+                    n = i;
+                }
+            }
+
+            bestSite = n;
         }
     }
 }

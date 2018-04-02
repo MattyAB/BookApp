@@ -23,11 +23,33 @@ namespace BookApp
     {
         BookLib.BookLib lib;
 
+        int[] possiblePrices;
+        int[] optimalPrices;
+
         public EvaluateWindow(BookLib.BookLib lib)
         {
+            possiblePrices = new int[5];
+            optimalPrices = new int[5];
             this.lib = lib;
-            List<Book> books = lib.Evaluate();
+            DisplayEvaluation(lib.Evaluate());
             InitializeComponent();
+        }
+
+        public void DisplayEvaluation(List<Book> books)
+        {
+            // Optimal
+            foreach(Book b in books)
+            {
+                b.SetBestSite();
+                optimalPrices[b.bestSite] += b.prices[b.bestSite];
+            }
+
+            // Possible
+            foreach (Book b in books)
+            {
+                for (int i = 0; i < 5; i++)
+                    possiblePrices[i] += b.prices[i];
+            }
         }
     }
 }
