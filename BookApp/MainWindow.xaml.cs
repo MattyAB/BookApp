@@ -53,5 +53,11 @@ namespace BookApp
                     throw ex;
             }
         }
+
+        private void Evaluate_Click(object sender, RoutedEventArgs e)
+        {
+            EvaluateWindow evaluateWindow = new EvaluateWindow(lib);
+            evaluateWindow.Show();
+        }
     }
 }
