@@ -16,7 +16,7 @@
         <TextBlock Text="Zapper" Foreground="White" Margin="654,10,10,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
         <TextBlock Text="Optimal" Foreground="White" Margin="10,45,675,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
         <TextBlock Text="Possible" Foreground="White" Margin="10,80,675,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
-        <Button Name="WO" Content="" HorizontalAlignment="Left" Margin="122,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="WO" Content="" HorizontalAlignment="Left" Margin="122,45,0,0" VerticalAlignment="Top" Width="128" Height="30" Click="WO_Click"/>
         <Button Name="WP" Content="" HorizontalAlignment="Left" Margin="122,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
         <Button Name="ZiO" Content="" HorizontalAlignment="Left" Margin="255,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
         <Button Name="ZiP" Content="" HorizontalAlignment="Left" Margin="255,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>

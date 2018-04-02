@@ -2,6 +2,7 @@
 using ModernChrome;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +27,19 @@ namespace BookApp
         int[] possiblePrices;
         int[] optimalPrices;
 
+        List<Book> books;
+
         public EvaluateWindow(BookLib.BookLib lib)
         {
             possiblePrices = new int[5];
             optimalPrices = new int[5];
             this.lib = lib;
             InitializeComponent();
-            DisplayEvaluation(lib.Evaluate());
+            books = lib.Evaluate();
+            DisplayEvaluation();
         }
 
-        public void DisplayEvaluation(List<Book> books)
+        public void DisplayEvaluation()
         {
             // Optimal
             foreach(Book b in books)
@@ -62,6 +66,17 @@ namespace BookApp
             MuP.Content = possiblePrices[2];
             MoP.Content = possiblePrices[3];
             ZaP.Content = possiblePrices[4];
+        }
+
+        private void WO_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(Book book in books)
+            {
+                if(book.bestSite == 0 && book.prices[0] > 0)
+                {
+                    Debug.Write(book.ISBN + ": " + book.prices[0] + "\n");
+                }
+            }
         }
     }
 }
