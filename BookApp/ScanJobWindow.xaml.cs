@@ -57,7 +57,22 @@ namespace BookApp
                 TitleBlock.Text = job.ISBN;
 
                 Barcode barcode = new Barcode();
-                Image img = barcode.Encode(TYPE.ISBN, job.ISBN);
+                Image img;
+                try
+                {
+                    img = barcode.Encode(TYPE.ISBN, job.ISBN);
+                }
+                catch(Exception e)
+                {
+                    if(e.Message == "EBOOKLANDISBN-2: Invalid input.  Must start with 978 and be length must be 9, 10, 12, 13 characters.")
+                    {
+                        img = barcode.Encode(TYPE.EAN13, job.ISBN);
+                    }
+                    else
+                    {
+                        throw e;
+                    }
+                }
 
                 // Convert Image to BitmapImage
                 var bi = new BitmapImage();
