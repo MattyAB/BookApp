@@ -1,4 +1,5 @@
-﻿using ModernChrome;
+﻿using BookLib;
+using ModernChrome;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace BookApp
         public EvaluateWindow(BookLib.BookLib lib)
         {
             this.lib = lib;
+            List<Book> books = lib.Evaluate();
             InitializeComponent();
         }
     }

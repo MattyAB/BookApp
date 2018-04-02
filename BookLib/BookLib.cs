@@ -182,5 +182,63 @@ namespace BookLib
 
             cmd.ExecuteNonQuery();
         }
+        
+        public List<Book> Evaluate()
+        {
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+
+            cmd.CommandText = "SELECT * FROM Books WHERE SellDate IS NULL";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = Connection;
+
+            reader = cmd.ExecuteReader();
+
+            List<Book> books = new List<Book>();
+
+            // For every book it gets
+            while (reader.Read())
+            {
+                Book book = new Book(reader.GetString(1));
+
+                for (int i = 0; i < 5; i++)
+                {
+                    // New SQL command to get scans of book
+                    SqlCommand cmd1 = new SqlCommand();
+                    SqlDataReader reader1;
+
+                    cmd1.CommandText = "SELECT * FROM BookPrice WHERE ID = " + reader.GetInt32(0) + " AND Site = " + i;
+                    cmd1.CommandType = CommandType.Text;
+                    cmd1.Connection = Connection;
+
+                    reader1 = cmd1.ExecuteReader();
+
+                    List<ScanJob> pastScans = new List<ScanJob>();
+
+                    // Add each past scan to the list of scans
+                    while (reader1.Read())
+                    {
+                        ScanJob job = new ScanJob();
+                        job.site = i;
+                        job.ISBN = reader.GetString(1);
+                        job.date = reader1.GetDateTime(3);
+                        job.price = reader1.GetInt32(2);
+                        pastScans.Add(job);
+                    }
+
+                    if (pastScans.Count != 0)
+                    {
+                        // NEEDS MORE CODE
+                        List<ScanJob> orderedScans = pastScans.OrderBy(o => o.date).ToList();
+
+                        book.prices[i] = orderedScans[orderedScans.Count - 1].price;
+                    }
+                }
+
+                books.Add(book);
+            }
+
+            return books;
+        }
     }
 }

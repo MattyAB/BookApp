@@ -13,9 +13,12 @@ namespace BookLib
         public string publisher;
         public DateTime publishDate;
 
+        public int[] prices;
+
         public Book(string ISBN)
         {
             this.ISBN = ISBN;
+            prices = new int[5];
         }
 
         public void GetBookDetails()
