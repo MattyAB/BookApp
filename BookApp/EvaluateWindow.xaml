@@ -8,7 +8,23 @@
         xmlns:local="clr-namespace:BookApp"
         mc:Ignorable="d"
         Title="EvaluateWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="Black">
+        <TextBlock Text="WeBuyBooks" Foreground="White" Margin="122,10,542,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <TextBlock Text="Ziffit" Foreground="White" Margin="255,10,409,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <TextBlock Text="MusicMagpie" Foreground="White" Margin="388,10,276,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <TextBlock Text="Momox" Foreground="White" Margin="521,10,143,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <TextBlock Text="Zapper" Foreground="White" Margin="654,10,10,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <TextBlock Text="Optimal" Foreground="White" Margin="10,45,675,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <TextBlock Text="Possible" Foreground="White" Margin="10,80,675,0" FontSize="20" Height="30" VerticalAlignment="Top" TextAlignment="Center" />
+        <Button Name="WO" Content="" HorizontalAlignment="Left" Margin="122,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="WP" Content="" HorizontalAlignment="Left" Margin="122,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="ZiO" Content="" HorizontalAlignment="Left" Margin="255,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="ZiP" Content="" HorizontalAlignment="Left" Margin="255,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="MuO" Content="" HorizontalAlignment="Left" Margin="388,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="MuP" Content="" HorizontalAlignment="Left" Margin="388,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="MoO" Content="" HorizontalAlignment="Left" Margin="521,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="MoP" Content="" HorizontalAlignment="Left" Margin="521,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="ZaO" Content="" HorizontalAlignment="Left" Margin="654,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="ZaP" Content="" HorizontalAlignment="Left" Margin="654,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
     </Grid>
 </modern:ModernWindow>

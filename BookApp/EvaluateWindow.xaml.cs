@@ -31,8 +31,8 @@ namespace BookApp
             possiblePrices = new int[5];
             optimalPrices = new int[5];
             this.lib = lib;
-            DisplayEvaluation(lib.Evaluate());
             InitializeComponent();
+            DisplayEvaluation(lib.Evaluate());
         }
 
         public void DisplayEvaluation(List<Book> books)
@@ -50,6 +50,18 @@ namespace BookApp
                 for (int i = 0; i < 5; i++)
                     possiblePrices[i] += b.prices[i];
             }
+
+            WO.Content = optimalPrices[0];
+            ZiO.Content = optimalPrices[1];
+            MuO.Content = optimalPrices[2];
+            MoO.Content = optimalPrices[3];
+            ZaO.Content = optimalPrices[4];
+
+            WP.Content = possiblePrices[0];
+            ZiP.Content = possiblePrices[1];
+            MuP.Content = possiblePrices[2];
+            MoP.Content = possiblePrices[3];
+            ZaP.Content = possiblePrices[4];
         }
     }
 }
