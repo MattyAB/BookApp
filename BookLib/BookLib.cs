@@ -56,7 +56,46 @@ namespace BookLib
 
             cmd.ExecuteNonQuery();
         }
-        
+
+        public void RemoveBook(string RawISBN)
+        {
+            // Checks
+
+            string ISBN = "";
+
+            foreach (char c in RawISBN)
+            {
+                if (Char.IsNumber(c))
+                {
+                    ISBN += c;
+                }
+            }
+
+            if (ISBN.Length != 13 && ISBN.Length != 10)
+            {
+                throw new Exception("The ISBN was not a known ISBN length. Needs to be 10 or 13 characters.");
+            }
+
+            if (ISBN.Length == 10)
+            {
+                ISBN = ISBNConvert(ISBN);
+            }
+
+            if (GetBook(ISBN).Count == 0)
+                throw new Exception("This book is not owned.");
+
+            // SQL Command
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "UPDATE Books SET SellDate = @date WHERE ISBN='" + ISBN + "' AND RecievedDate IS NOT NULL";
+            cmd.Parameters.AddWithValue("@date", DateTime.Parse("02/04/2018"));
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = Connection;
+
+            cmd.ExecuteNonQuery();
+        }
+
         public List<Book> GetBook(string ISBN)
         {
             SqlCommand cmd = new SqlCommand();

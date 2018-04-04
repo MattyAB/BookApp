@@ -59,5 +59,11 @@ namespace BookApp
             EvaluateWindow evaluateWindow = new EvaluateWindow(lib);
             evaluateWindow.Show();
         }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            BookRemoveWindow bookRemoveWindow = new BookRemoveWindow(lib);
+            bookRemoveWindow.Show();
+        }
     }
 }
