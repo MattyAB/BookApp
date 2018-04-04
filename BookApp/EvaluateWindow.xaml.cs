@@ -106,7 +106,7 @@ namespace BookApp
             {
                 foreach (Book book in books)
                 {
-                    if (book.bestSite == site && book.prices[site] > 0)
+                    if (book.prices[site] > 0)
                     {
                         Debug.Write(book.ISBN + ": " + book.prices[site] + "\n");
                     }
@@ -116,7 +116,7 @@ namespace BookApp
             {
                 foreach (Book book in books)
                 {
-                    if (book.prices[site] > 0)
+                    if (book.bestSite == site && book.prices[site] > 0)
                     {
                         Debug.Write(book.ISBN + ": " + book.prices[site] + "\n");
                     }
