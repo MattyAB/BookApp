@@ -68,24 +68,58 @@ namespace BookApp
             ZaP.Content = possiblePrices[4];
         }
 
-        private void WO_Click(object sender, RoutedEventArgs e)
+        private void EvaluateClick(object sender, RoutedEventArgs e)
         {
-            foreach (Book book in books)
+            string ButtonName = ((Button)sender).Name;
+
+            bool Possible;
+
+            if (ButtonName.Substring(ButtonName.Length - 1) == "P")
+                Possible = true;
+            else
+                Possible = false;
+
+            ButtonName = ButtonName.Remove(ButtonName.Length - 1);
+
+            int site = 0;
+
+            switch(ButtonName)
             {
-                if (book.bestSite == 0 && book.prices[0] > 0)
+                case "W":
+                    site = 0;
+                    break;
+                case "Zi":
+                    site = 1;
+                    break;
+                case "Mu":
+                    site = 2;
+                    break;
+                case "Mo":
+                    site = 3;
+                    break;
+                case "Za":
+                    site = 4;
+                    break;
+            }
+
+            if(Possible)
+            {
+                foreach (Book book in books)
                 {
-                    Debug.Write(book.ISBN + ": " + book.prices[0] + "\n");
+                    if (book.bestSite == site && book.prices[site] > 0)
+                    {
+                        Debug.Write(book.ISBN + ": " + book.prices[site] + "\n");
+                    }
                 }
             }
-        }
-
-        private void MoO_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (Book book in books)
+            else
             {
-                if (book.bestSite == 3 && book.prices[3] > 0)
+                foreach (Book book in books)
                 {
-                    Debug.Write(book.ISBN + ": " + book.prices[3] + "\n");
+                    if (book.prices[site] > 0)
+                    {
+                        Debug.Write(book.ISBN + ": " + book.prices[site] + "\n");
+                    }
                 }
             }
         }
