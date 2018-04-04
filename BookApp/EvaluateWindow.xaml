@@ -22,7 +22,7 @@
         <Button Name="ZiP" Content="" HorizontalAlignment="Left" Margin="255,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
         <Button Name="MuO" Content="" HorizontalAlignment="Left" Margin="388,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
         <Button Name="MuP" Content="" HorizontalAlignment="Left" Margin="388,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
-        <Button Name="MoO" Content="" HorizontalAlignment="Left" Margin="521,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
+        <Button Name="MoO" Content="" HorizontalAlignment="Left" Margin="521,45,0,0" VerticalAlignment="Top" Width="128" Height="30" Click="MoO_Click"/>
         <Button Name="MoP" Content="" HorizontalAlignment="Left" Margin="521,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
         <Button Name="ZaO" Content="" HorizontalAlignment="Left" Margin="654,45,0,0" VerticalAlignment="Top" Width="128" Height="30"/>
         <Button Name="ZaP" Content="" HorizontalAlignment="Left" Margin="654,80,0,0" VerticalAlignment="Top" Width="128" Height="30"/>

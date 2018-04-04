@@ -70,11 +70,22 @@ namespace BookApp
 
         private void WO_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Book book in books)
+            foreach (Book book in books)
             {
-                if(book.bestSite == 0 && book.prices[0] > 0)
+                if (book.bestSite == 0 && book.prices[0] > 0)
                 {
                     Debug.Write(book.ISBN + ": " + book.prices[0] + "\n");
+                }
+            }
+        }
+
+        private void MoO_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Book book in books)
+            {
+                if (book.bestSite == 3 && book.prices[3] > 0)
+                {
+                    Debug.Write(book.ISBN + ": " + book.prices[3] + "\n");
                 }
             }
         }
