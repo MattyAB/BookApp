@@ -14,6 +14,7 @@
         <Button Content="Scan Books" HorizontalAlignment="Left" Margin="9,80,0,0" VerticalAlignment="Top" Width="129" Click="ScanJobNav_Click" Height="30"/>
         <Button Content="Evaluate" HorizontalAlignment="Left" Margin="9,115,0,0" VerticalAlignment="Top" Width="129" Click="Evaluate_Click" Height="30"/>
         <Button Content="Remove Books" HorizontalAlignment="Left" Margin="9,150,0,0" VerticalAlignment="Top" Width="129" Click="Remove_Click" Height="30"/>
+        <TextBox Name="ScanLevel" HorizontalAlignment="Left" Height="30" Margin="143,80,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
 
     </Grid>
 </modern:ModernWindow>

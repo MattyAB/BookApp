@@ -38,7 +38,7 @@ namespace BookApp
 
         private void ScanJobNav_Click(object sender, RoutedEventArgs e)
         {
-            ScanJobWindow scanJobWindow = new ScanJobWindow(lib, 0);
+            ScanJobWindow scanJobWindow = new ScanJobWindow(lib, Convert.ToInt32(ScanLevel.Text));
             try
             {
                 scanJobWindow.Show();

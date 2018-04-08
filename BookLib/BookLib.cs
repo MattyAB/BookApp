@@ -184,18 +184,15 @@ namespace BookLib
                         pastScans.Add(job);
                     }
 
-                    if (pastScans.Count == 0)
+                    List<ScanJob> orderedScans = pastScans.OrderBy(o => o.date).ToList();
+
+                    if(DateTime.Now.Subtract(orderedScans[orderedScans.Count - 1].date).TotalDays > depth)
                     {
                         ScanJob job = new ScanJob();
                         job.ISBN = reader.GetString(1);
                         job.ID = reader.GetInt32(0);
                         job.site = i;
                         jobs.Add(job);
-                    }
-                    else
-                    {
-                        // NEEDS MORE CODE
-                        List<ScanJob> orderedScans = pastScans.OrderBy(o => o.date).ToList();
                     }
                 }
             }
