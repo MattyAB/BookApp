@@ -89,7 +89,7 @@ namespace BookLib
             SqlCommand cmd = new SqlCommand();
 
             cmd.CommandText = "UPDATE Books SET SellDate = @date WHERE ISBN='" + ISBN + "' AND RecievedDate IS NOT NULL";
-            cmd.Parameters.AddWithValue("@date", DateTime.Parse("02/04/2018"));
+            cmd.Parameters.AddWithValue("@date", DateTime.Now);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = Connection;
 
@@ -186,13 +186,24 @@ namespace BookLib
 
                     List<ScanJob> orderedScans = pastScans.OrderBy(o => o.date).ToList();
 
-                    if(DateTime.Now.Subtract(orderedScans[orderedScans.Count - 1].date).TotalDays > depth)
+                    if(orderedScans.Count == 0)
                     {
                         ScanJob job = new ScanJob();
                         job.ISBN = reader.GetString(1);
                         job.ID = reader.GetInt32(0);
                         job.site = i;
                         jobs.Add(job);
+                    }
+                    else
+                    {
+                        if (DateTime.Now.Subtract(orderedScans[orderedScans.Count - 1].date).TotalDays > depth)
+                        {
+                            ScanJob job = new ScanJob();
+                            job.ISBN = reader.GetString(1);
+                            job.ID = reader.GetInt32(0);
+                            job.site = i;
+                            jobs.Add(job);
+                        }
                     }
                 }
             }
@@ -232,6 +243,8 @@ namespace BookLib
 
             List<Book> books = new List<Book>();
 
+            int[] totals = new int[6];
+
             // For every book it gets
             while (reader.Read())
             {
@@ -268,6 +281,11 @@ namespace BookLib
                         List<ScanJob> orderedScans = pastScans.OrderBy(o => o.date).ToList();
 
                         book.prices[i] = orderedScans[orderedScans.Count - 1].price;
+                        totals[i] += 1;
+                    }
+                    else
+                    {
+                        totals[5] += 1;
                     }
                 }
 
